@@ -1,0 +1,122 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/places/tabs/offers"
+        text="Back"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">New Offer</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button
+        (click)="onCreateOffer()"
+        [disabled]="form.invalid || !this.form.get('image')!.value"
+      >
+        <ion-icon name="checkmark" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <form [formGroup]="form">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item lines="none">
+            <ion-input
+              label="Title"
+              labelPlacement="floating"
+              type="text"
+              autocomplete="on"
+              autocorrect="on"
+              formControlName="title"
+              errorText="Invalid Title"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item lines="none">
+            <ion-textarea
+              label="Short Description"
+              labelPlacement="floating"
+              rows="3"
+              spellcheck="true"
+              formControlName="description"
+              maxlength="180"
+              counter="true"
+              errorText="Must enter a description"
+            ></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item lines="none">
+            <ion-input
+              label="Price"
+              labelPlacement="floating"
+              type="number"
+              formControlName="price"
+              errorText="Invalid price"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item lines="none">
+            <ion-input
+              #fromDate
+              label="Available from"
+              labelPlacement="floating"
+              type="datetime-local"
+              name="fromDate"
+              [min]="currentDate"
+              [max]="maxDate"
+              formControlName="dateFrom"
+              errorText="A date must be selected"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-input
+              #toDate
+              label="Available to"
+              labelPlacement="floating"
+              type="datetime-local"
+              name="toDate"
+              [min]="fromDate.value"
+              [max]="maxDate"
+              formControlName="dateTo"
+              errorText="A date must be selected"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <app-location-picker
+            (locationPick)="onLocationPicked($event)"
+            #location
+            required
+          ></app-location-picker>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <app-image-picker
+            (imagePick)="onImagePicked($event)"
+          ></app-image-picker>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

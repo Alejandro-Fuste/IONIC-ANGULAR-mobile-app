@@ -1,0 +1,120 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ selectedPlace.title }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onCancel()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding ion-text-center">
+  <form #form="ngForm" (ngSubmit)="onBookPlace()">
+    <ion-grid>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item lines="none">
+            <ion-input
+              label="First Name"
+              labelPlacement="floating"
+              type="text"
+              ngModel
+              name="first-name"
+              required
+              #firstNameCtrl="ngModel"
+              errorText="Name must be provided"
+            >
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item lines="none">
+            <ion-input
+              label="Last Name"
+              labelPlacement="floating"
+              type="text"
+              ngModel
+              name="last-name"
+              required
+              #lastNameCtrl="ngModel"
+              errorText="Name must be provided"
+            >
+            </ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item lines="none">
+            <ion-select
+              label="Number of Guests"
+              label-placement="floating"
+              [ngModel]="'2'"
+              name="guest-number"
+              #guestsCtrl="ngModel"
+            >
+              <ion-select-option value="1">1</ion-select-option>
+              <ion-select-option value="2">2</ion-select-option>
+              <ion-select-option value="3">3</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item lines="none">
+            <ion-input
+              label="From"
+              labelPlacement="floating"
+              type="datetime-local"
+              name="date-from"
+              [min]=""
+              [max]=""
+              ngModel
+              #startDateCtrl="ngModel"
+              required="true"
+              errorText="A date must be selected"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item lines="none">
+            <ion-input
+              label="To"
+              labelPlacement="floating"
+              type="datetime-local"
+              name="date-to"
+              [min]=""
+              [max]=""
+              ngModel
+              #EndDateCtrl="ngModel"
+              required="true"
+              errorText="A date must be selected"
+            ></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-button
+            type="submit"
+            color="primary"
+            expand="block"
+            [disabled]="!form.valid || !datesValid"
+            >Book!</ion-button
+          >
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
